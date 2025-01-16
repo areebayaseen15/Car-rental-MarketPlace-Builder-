@@ -1,0 +1,90 @@
+
+
+                        API Specification Document
+
+
+1. Rental Duration Endpoint
+o Endpoint Name: /rental-duration
+o Method: POST
+o Description: Add rental details for a specific product.
+o Payload: { "productId": 456, "duration": "7 days", "deposit": 500 }
+o Response : { "confirmationId": 789, "status": "Success" }
+
+
+2. Car Listings Endpoint
+o Endpoint Name: /cars
+o Method: fetch
+o Description: 	Fetch all available cars with optional filters..
+o Payload:{ "carType": "SUV", "capacity": 5 } (optional filters)
+o Response : [ { "carId": 101, "make": "Toyota", "model": "Highlander", "price": 100, "imageUrl": "link_to_image" }, { "carId": 102, "make": "Honda", "model": "CRV", "price": 120, "imageUrl": "link_to_image" } ]
+
+
+3. Car Details Endpoint
+o Endpoint Name: /car/:carId
+o Method: Get
+o Description: Fetch detailed information for a specific car
+o Payload:None (carId is passed as a URL parameter)
+o Response : { "carId": 101, "make": "Toyota", "model": "Highlander", "year": 2020, "price": 100, "availability": true, "imageUrl": "link_to_image", "features": ["GPS", "Sunroof", "Bluetooth"] }
+
+
+4. Booking Endpoint
+o Endpoint Name: /booking
+o Method: POST
+o Description: Create a new booking for a selected car
+o Payload:{ "userId": 123, "carId": 101, "pickupLocation": "NYC", "dropoffLocation": "LA", "pickupDate": "2025-01-20", "dropoffDate": "2025-01-27", "totalAmount": 700 }
+o Response: { "bookingId": 456, "status": "confirmed", "totalAmount": 700 }
+
+
+5. Payment Endpoint
+o Endpoint Name: /payment
+o Method: POST
+o Description: Process payment for a booking.
+o Payload:{ "bookingId": 456, "paymentMethod": "creditCard", "amount": 700 }
+o Response :{ "paymentId": 789, "status": "success", "confirmationNumber": "AB123" }
+
+6. User Profile Endpoint
+o Endpoint Name:/user/profile/:userId
+o Method:GET
+o Description: Fetch user profile information
+o Payload:None (userId is passed as a URL parameter)
+o Response :{ "userId": 123, "name": "John Doe", "email": "johndoe@example.com", "pastBookings": [{ "bookingId": 456, "carId": 101, "pickupDate": "2025-01-20", "dropoffDate": "2025-01-27" }] }
+
+
+7. Car Availability Endpoint
+o Endpoint Name: /car/availability/:carId
+o Method: Get
+o Description:None (carId is passed as a URL parameter)
+o Payload:{ "userId": 123, "carId": 101, "pickupLocation": "NYC", "dropoffLocation": "LA", "pickupDate": "2025-01-20", "dropoffDate": "2025-01-27", "totalAmount": 700 }
+o Response:{ "carId": 101, "availability": true, "message": "Available for selected dates" }
+
+
+8.Search Cars Endpoint
+o Endpoint Name: /cars/search
+o Method: Get
+o Description:Search for cars based on user-provided criteria.
+o Payload:{ "make": "Toyota", "model": "Highlander", "minPrice": 100, "maxPrice": 200 }
+o Response:[ { "carId": 101, "make": "Toyota", "model": "Highlander", "price": 100, "imageUrl": "link_to_image" }, { "carId": 102, "make": "Honda", "model": "CRV", "price": 120, "imageUrl": "link_to_image" } ]
+
+
+
+9. Update Car Details Endpoint (Admin Only)
+o Endpoint Name: /admin/car/:carId
+o Method: Put
+o Description:Update car details for a specific car.
+o Payload:{ "carId": 101, "price": 110, "availability": false, "features": ["GPS", "Bluetooth", "Heated Seats"] }
+o Response:{ "status": "success", "updatedCar": { "carId": 101, "price": 110, "availability": false, "features": ["GPS", "Bluetooth", "Heated Seats"] } }
+
+
+10. Cancel Booking Endpoint
+o Endpoint Name:/booking/cancel/:bookingId
+o Method: Post
+o Description:Cancel a specific booking.
+o Payload:{ "bookingId": 456 }
+o Response :{ "status": "success", "message": "Booking cancelled successfully." }
+
+
+Key Notes
+Payloads: Payloads represent the data that will be sent with the request. For POST and PUT methods, payloads contain the information that needs to be processed by the backend.
+Responses: Responses show what data the frontend will receive after making an API request. This includes confirmation details, errors, and success messages.
+Methods: The methods describe the type of request to be made. GET is used to retrieve data, POST to submit new data, and PUT to update existing data.
+This structure should cover the core API endpoints for our car rental website
