@@ -6,7 +6,6 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import convertToSubcurrency from "../../../lib/convertToSubcurrency";
 import { StripeError } from "@stripe/stripe-js";
 
 const locations = ["Garden", "Sadar", "Clifton", "North Nazimabad", "Defence", "Bahria Town"];
@@ -25,6 +24,11 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
   const [agreeToMarketing, setAgreeToMarketing] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
+  function convertToSubcurrency(amount: number, factor = 100) {
+    return Math.round(amount * factor);
+  }
+  
+  
   useEffect(() => {
     fetch("/api/create-payment-intent", {
       method: "POST",
