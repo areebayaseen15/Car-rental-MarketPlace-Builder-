@@ -3,7 +3,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutPage from "@/app/components/CheckoutPage";
-import convertToSubcurrency from "../../../../../lib/convertToSubcurrency";
 import { useEffect, useState , use} from "react";
 import Image from "next/image";
 import { AiFillStar } from "react-icons/ai";
@@ -67,6 +66,10 @@ const Payment = ({ params }: PageProps) => {
   if (loading) return <p>Loading...</p>;
   if (!car) return <p>Car not found!</p>;
 
+  function convertToSubcurrency(amount: number, factor = 100) {
+    return Math.round(amount * factor);
+  }
+  
   const pricePerDay = cleanPrice(car?.pricePerDay || "0");
   const amount = convertToSubcurrency(pricePerDay);
 
