@@ -1,12 +1,12 @@
-"use client"; // Mark this as a Client Component
+"use client"; 
 import Link from 'next/link';
-// import { useSearchParams } from 'next/navigation'; // Import the hook
+import { useSearchParams } from 'next/navigation'; 
 
 export default function PaymentSuccess() {
-  // const searchParams = useSearchParams(); // Get the search parameters using the hook
-  // const amount = searchParams.get("amount"); // Access the amount parameter
-
+  const searchParams = useSearchParams(); 
+  const amount = searchParams.get("amount"); 
   return (
+    <div>
     <main className="mt-20 flex items-center justify-center min-h-screen bg-gradient-to-tr from-blue-500 to-blue-400">
       <div className="bg-white max-w-md w-full p-8 rounded-lg shadow-lg text-center space-y-6">
         <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
@@ -19,12 +19,12 @@ export default function PaymentSuccess() {
         <div className="mt-6 bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-xl text-white">
           <h3 className="text-xl font-semibold">Amount Paid</h3>
           <div className="mt-2 text-3xl font-bold">
-            {/* ${amount} */}
+            ${amount}
           </div>
         </div>
 
         <div className="mt-6 text-sm text-gray-600">
-          <p>Your car rental is being processed. We'll send you the details shortly.</p>
+          <p>Your car rental is being processed. We&apos;ll send you the details shortly.</p>
         </div>
 
         <div className="mt-8">
@@ -37,6 +37,7 @@ export default function PaymentSuccess() {
           </Link>
         </div>
       </div>
-    </main>
-  );
+    </main>
+    </div>
+  );
 }
